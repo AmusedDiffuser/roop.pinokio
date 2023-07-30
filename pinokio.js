@@ -1,39 +1,40 @@
 const path = require('path')
 const { existsSync } = require('fs')
+const { writeFileSync } = require('fs')
 
 module.exports = {
 
-  title: 'Roop',
-
-  description: 'Deepfake face swapping for images and video',
-  
-  isInstalled: () => {
-    return existsSync(path.resolve(__dirname, 'roop', 'env'))
-  },
-
-  update: () => {
-    return 'update.json'
-  },
-
-  start: () => {
-    if (module.exports.isInstalled()) {
-      return 'run.json'
-    }
-  },
+  //...other functions  
 
   menu: async (kernel) => {
-    let installed = module.exports.isInstalled()
-    if (installed) {
-      return {
-        html: "<i class='fa-solid fa-check'></i> Roop Installed",
-        href: "run.json"  
+
+    let menuObject
+
+    try {
+
+      let installed = module.exports.isInstalled()
+
+      if (installed) {
+        menuObject = {
+          html: "<i class='fa-solid fa-check'></i> Roop Installed",
+          href: "run.json"
+        }
+      } else {
+        menuObject = {
+          html: "<i class='fa-solid fa-arrow-down'></i> Install Roop",
+          href: "install.json"
+        }
       }
-    } else {
-      return {
-        html: "<i class='fa-solid fa-arrow-down'></i> Install Roop",
-        href: "install.json"
-      }
+
+    } catch (err) {
+      console.error('Error generating menu', err)
     }
+    
+    // Log menu object
+    writeFileSync('pinokio-menu.log', JSON.stringify(menuObject))
+
+    return menuObject
+
   }
 
 }
