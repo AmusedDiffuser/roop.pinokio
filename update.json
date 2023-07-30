@@ -1,0 +1,30 @@
+{
+  "run": [
+    {
+      "method": "shell.run", 
+      "params": {
+        "message": "git pull origin master",
+        "path": "roop",
+        "error": "pull_error"  
+      }
+    },
+    {
+      "method": "notify",
+      "params": {
+        "title": "Roop Updated",
+        "description": "Roop has been updated successfully!",
+        "type": "success"
+      },
+      "when": "!pull_error" 
+    },
+    {
+      "method": "notify", 
+      "params": {
+        "title": "Update Failed",
+        "description": "There was an error updating Roop. Please try again.",
+        "type": "error"
+      },
+      "when": "pull_error"
+    }
+  ]
+}
