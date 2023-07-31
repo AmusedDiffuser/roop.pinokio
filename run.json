@@ -1,0 +1,10 @@
+{
+  "run": [
+    {
+      "method": "python",
+      "params": {
+        "script": "roop/run.py"  
+      }
+    }
+  ]
+}

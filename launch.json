@@ -1,9 +1,0 @@
-const path = require('path')
-
-module.exports = {
-
-  async run(req, ondata, kernel) {
-    await kernel.python(path.resolve(__dirname, 'roop/run.py')) 
-  }
-
-}
